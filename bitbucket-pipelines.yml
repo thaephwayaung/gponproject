@@ -1,0 +1,48 @@
+image: atlassian/default-image:3
+
+pipelines:
+  default:
+    - step:
+        name: "The default step"
+        script:
+          - echo "hello ,The first step of a pipeline cannot trigger manually"
+  branches:
+    development:
+      - step:
+          name: "Manual Deployment for Master Branch"
+          trigger: manual
+          script:
+            - echo "Manual Deployment from master Branch"
+
+    master:
+      - step:
+          name: "Clear Docker Build Cache"
+          services:
+            - docker
+          script:
+            - docker builder prune -a
+
+      - step:
+          name: "Debug Environment Variables"
+          script:
+            - echo $REACT_APP_API_SERVER_URL
+            - echo $REACT_APP_MAP_KEY
+            - echo $REACT_APP_MAP_ID
+            - echo $REACT_APP_ENCRYPTION_KEY
+
+      - step:
+          name: "Build and Push Docker Image"
+          services:
+            - docker
+          script:
+            - |
+              docker build \
+                --build-arg REACT_APP_API_SERVER_URL=$REACT_APP_API_SERVER_URL \
+                --build-arg REACT_APP_MAP_KEY=$REACT_APP_MAP_KEY \
+                --build-arg REACT_APP_MAP_ID=$REACT_APP_MAP_ID \
+                --build-arg REACT_APP_ENCRYPTION_KEY=$REACT_APP_ENCRYPTION_KEY \
+                -t mfe-node .
+            # - docker build -t mfe-node .
+            # - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+            # - docker tag mfe-node $DOCKER_USERNAME/mfe-node:b1
+            # - docker push $DOCKER_USERNAME/mfe-node:b1

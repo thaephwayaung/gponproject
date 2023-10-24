@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Outfit&display=swap");
+
+@layer base {
+    :root {
+        --color-primary: #6c2ae2;
+        --color-primary-light: #e4d6ff;
+        --color-primary-dark: #a288ea;
+
+        --color-secondary: #bc8f27;
+        --color-secondary-dark: #688f4e;
+
+        --color-default: #ffffff;
+        --color-default-light: #f5f7fb;
+        --color-default-dark: rgb(160, 158, 158);
+
+        --color-base-light: #000000;
+        --color-base-dark: #343434;
+
+        --color-success: #28b15a;
+        --color-warning: #ffa726;
+        --color-danger: #ff0000;
+    }
+
+    .light {
+        --color-primary: #6c2ae2;
+        --color-primary-light: #e4d6ff;
+        --color-primary-dark: #a288ea;
+
+        --color-secondary: #bc8f27;
+        --color-secondary-dark: #688f4e;
+
+        --color-default: #ffffff;
+        --color-default-light: #f5f7fb;
+        --color-default-dark: rgb(160, 158, 158);
+
+        --color-base-light: #000000;
+        --color-base-dark: #343434;
+    }
+
+    .heading-font {
+        @apply font-Outfit text-[26px] leading-[25px] tracking-[.15px] antialiased tablet:text-[30px];
+      }
+    
+      .sub-heading-font {
+        @apply font-Outfit text-lg leading-[25px] tracking-[.15px] antialiased;
+      }
+    
+      .body-font {
+        @apply font-Outfit text-base antialiased laptop:text-sm;
+      }
+    
+      .secondary-font {
+        @apply font-Outfit text-[0.8rem] antialiased;
+      }
+    
+      .caption-font {
+        @apply font-Outfit text-sm antialiased laptop:text-xs;
+      }
+}
